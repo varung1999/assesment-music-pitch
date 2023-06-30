@@ -1,5 +1,3 @@
-# assesment-music-pitch
-
 /*
 A new singer is looking for songs to perform. To be able to perform a song all the notes in the song must be within the singer's range, which is given by the lowest and highest notes the singer is able to sing.
 
@@ -69,8 +67,6 @@ import java.io.*;
 import java.util.*;
 
 public class Solution {
-  static Map<String, Integer> songOrderMap= new LinkedHashMap<>();
-  static Map< Integer, String> reverseOrderMap= new LinkedHashMap<>();
   public static void main(String[] argv) {
     String[] song1 = {"F4", "B4", "C5"};
     String[] song2 = {"C3", "E3", "G3", "C4", "E4", "G4", "C5"};
@@ -83,47 +79,5 @@ public class Solution {
                       "B4", "B4", "B4", "C5", "E5", "A5", "E5", 
                       "C5", "A4", "E5", "D5", "C5", "B4"};
     String[] song5 = {"F4"};
-    char[] pitch = new char[]{'C', 'D', 'E', 'F', 'G', 'A', 'B'};
-    int precendence = 56;
-    for(int i = 7; i >= 0; i--){
-      for(int j = pitch.length - 1; j >= 0; j--){
-        String key = String.valueOf(pitch[j]) + i;
-        songOrderMap.put(key, precendence);
-        reverseOrderMap.put(precendence, key);
-        precendence--;
-      }
-    }
-    
-    System.out.println(singable(song1, "F4", "C5"));
-    System.out.println(singable(song1, "A4", "C5"));
-
-    System.out.println(singable(song2, "B2", "C5"));
-    System.out.println(singable(song2, "C3", "B4"));
-    System.out.println(singable(song3, "B4", "B5"));
-    System.out.println(singable(song3, "B4", "C5"));
-    System.out.println(singable(song4, "D4", "A5"));
-    System.out.println(singable(song4, "D4", "G5"));
-    System.out.println(singable(song5, "D4", "E4"));
-    
-  }
-  
-  public static boolean singable(String[] songs, String low, String high){
-    int from = songOrderMap.get(low);
-    int to = songOrderMap.get(high);
-    if(to < from){
-      return false;
-    }
-    
-    for(String song : songs){
-      int val = songOrderMap.get(song);
-      if(!(val <= to && val >= from)){
-        return false;
-      }
-    }
-    
-    
-    return true;
   }
 }
-
-
